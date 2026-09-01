@@ -15,15 +15,3 @@ The main loop (`simulation.py`) runs a 50-lap stint with dynamic traffic logic[c
 
 ## Telemetry Output
 The script outputs turn-by-turn telemetry, showing exactly when the tire/fuel crossover effect collapses under thermal stress[cite: 3].
-
-```text
---- Starting 50-Lap Stint at Barcelona ---
-Car: MCL38 | Tyre: C2 (Medium) | Starting Fuel: 100kg
-Lap  | Net Pace Impact  | Engine Temp  | Lift & Coast  | Status
---------------------------------------------------------------------------------
-14   | +0.446s          | 100.0C       | 0.0%          | ✅ CLEAN
-15   | +0.646s          | 104.3C       | 0.0%          | ⚠️ TRAFFIC
-16   | +0.783s          | 107.5C       | 0.0%          | ⚠️ TRAFFIC
-17   | +0.886s          | 110.0C       | 5.0%          | ⚠️ TRAFFIC
-25   | +1.611s          | 109.8C       | 5.0%          | ⚠️ TRAFFIC
-26   | +1.390s          | 105.5C       | 5.0%          | ✅ CLEAN
