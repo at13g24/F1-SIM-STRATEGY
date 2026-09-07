@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 fastf1.Cache.enable_cache('f1_cache')
 fastf1.plotting.setup_mpl()  # Turns on F1-style dark mode graphs
 
-# Example using 2025 Barcelong Race. Looking at outlap data
+# Example using 2025 Barcelong Race. Looking at outlap data. To be changed by track.
 
 # 2. Load the 2025 Barcelona Race
 print("Loading 2025 Barcelona Race Data...")
