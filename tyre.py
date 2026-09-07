@@ -1,8 +1,7 @@
 
 import math
 
-# 1. DYNAMIC CONFIGURATION DATABASE
-# Calibrated to an 80.0s baseline track. Temps compressed to 85-100C.
+# Calibrated to an 80.0s baseline track. Temps 85-100C.
 COMPOUND_SPECS = {
     "C1": {"base_deg": 0.04, "optimal_temp": 100.0,
            "pace_rating": 1.2,  "cliff_lap": 42},
@@ -41,8 +40,7 @@ class Tyre:
                                     in_dirty_air=False, driver_modifier=1.0,
                                     chassis_modifier=1.0):
 
-        # --- NEW: DISTANCE SCALING ---
-        # Calculate how long this track is compared to our 80s baseline
+        # Calculate how long this track is compared to the 80s baseline
         track_scale_factor = track_object.baseline_lap_time / 80.0
 
         # Scale the cliff lap (longer track = fewer laps until the cliff)
@@ -51,7 +49,7 @@ class Tyre:
         # Scale the base degradation severity
         actual_deg_rate = self.base_deg_rate * track_scale_factor
 
-        # 1. DYNAMIC BASELINE & PACE SCALING
+        # Pace scaling.
         baseline_compound = track_object.available_compounds[1]
         baseline_rating = COMPOUND_SPECS[baseline_compound]["pace_rating"]
 
@@ -61,7 +59,7 @@ class Tyre:
         if not self.is_new:
             relative_pace_delta += 0.2
 
-        # 2. THERMODYNAMIC MODEL
+        # Thermo model
         generated_heat = current_track_temp + (corner_stress_multiplier * 50.0)
         if in_dirty_air:
             generated_heat *= track_object.dirty_air_coefficient
@@ -71,7 +69,7 @@ class Tyre:
         temp_delta = abs(self.optimal_temp - self.current_temp)
         thermal_multiplier = 1.0 + (temp_delta * 0.015)
 
-        # 3. WEAR CALCULATION
+        # Calculate tyre wear
         total_modifier = math.prod([
             track_object.base_abrasion,
             corner_stress_multiplier,
