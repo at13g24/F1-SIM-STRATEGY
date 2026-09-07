@@ -26,7 +26,7 @@ class Track:
         self.dirty_air_coefficient = dirty_air_coefficient
 
 
-# --- Complete F1 Calendar Track Configuration Database ---
+# 2025 F1 Calendar Track Configuration Database
 TRACK_DATABASE = {
     "Bahrain": Track(
         name="Bahrain",
