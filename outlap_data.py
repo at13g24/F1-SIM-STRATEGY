@@ -7,12 +7,14 @@ import matplotlib.pyplot as plt
 fastf1.Cache.enable_cache('f1_cache')
 fastf1.plotting.setup_mpl()  # Turns on F1-style dark mode graphs
 
+# Example using 2025 Barcelong Race. Looking at outlap data
+
 # 2. Load the 2025 Barcelona Race
 print("Loading 2025 Barcelona Race Data...")
 session = fastf1.get_session(2025, 'Spain', 'R')
 session.load(telemetry=False, weather=False)
 
-# 3. Isolate the Out-Laps
+# 3. Isolate Out-Laps
 laps = session.laps
 # An out-lap is defined as any lap that has a recorded "Pit Out Time"
 out_laps = laps[laps['PitOutTime'].notna()]
@@ -28,7 +30,7 @@ print(
       f"green-flag out-laps."
       )
 
-# 5. Plot the Histogram
+# 5. Plot Histogram
 plt.figure(figsize=(10, 6))
 plt.hist(green_flag_out_laps, bins=15, color='cyan', edgecolor='white',
          alpha=0.8)
