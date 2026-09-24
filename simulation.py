@@ -16,7 +16,7 @@ def run_stint():
     front_left = Tyre(compound_name=medium_compound, is_new=True)
 
     print(f"--- Starting 50-Lap Stint at {track.name} ---")
-    print(f"Car: {mclaren.chassis_name} | Tyre: {front_left.compound}"
+    print(f"Car: {F1.chassis_name} | Tyre: {front_left.compound}"
           f" (Medium) | Starting Fuel: 100kg")
     print(f"{'Lap':<4} | {'Net Pace Impact':<16} |"
           f" {'Engine Temp':<12} | {'Lift & Coast':<13} | {'Status'}")
@@ -38,13 +38,13 @@ def run_stint():
 
         # Driver only lifts and coasts if the engine is getting dangerously hot
         current_lnc = 0.0
-        if mclaren.engine_temp > 113.0:
+        if F1.engine_temp > 113.0:
             current_lnc = 15.0  # Management to avoid 115C derating
-        elif mclaren.engine_temp > 108.0:
+        elif F1.engine_temp > 108.0:
             current_lnc = 5.0   # Mild management as temps rise
 
         # Car Process
-            car_impact = mclaren.process_lap(
+            car_impact = F1.process_lap(
             track_object=track,
             gap_to_car_ahead=gap,
             lift_and_coast_pct=current_lnc
