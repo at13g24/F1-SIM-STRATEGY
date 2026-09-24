@@ -6,13 +6,12 @@ from car import Car
 
 
 def run_stint():
-    # 1. Setup the Environment
     track = TRACK_DATABASE["Barcelona"]
 
-    # 2. Setup the Car (Aggressively fueled to 100kg, - review starting fuel data)
-    mclaren = Car(chassis_name="MCL38", starting_fuel_kg=100.0)
+    # Setup the Car Fueled to 100kg (- review starting fuel data)
+    F1 = Car(chassis_name="F1", starting_fuel_kg=100.0)
 
-    # 3. Tyres, this example uses medium.
+    # Tyres, this example uses medium.
     medium_compound = track.available_compounds[1]
     front_left = Tyre(compound_name=medium_compound, is_new=True)
 
@@ -23,7 +22,7 @@ def run_stint():
           f" {'Engine Temp':<12} | {'Lift & Coast':<13} | {'Status'}")
     print("-" * 80)
 
-    # 4. The Main Loop
+    # Main Loop
     for lap in range(1, 51):
 
         # Default to clean air
@@ -40,7 +39,7 @@ def run_stint():
         # Driver only lifts and coasts if the engine is getting dangerously hot
         current_lnc = 0.0
         if mclaren.engine_temp > 113.0:
-            current_lnc = 15.0  # Heavy management to avoid 115C derating
+            current_lnc = 15.0  # Management to avoid 115C derating
         elif mclaren.engine_temp > 108.0:
             current_lnc = 5.0   # Mild management as temps rise
 
@@ -65,10 +64,9 @@ def run_stint():
         # Calculate net time gained/lost
         total_lap_impact = car_impact + tyre_impact
 
-        # 5. Print Telemetry
-        # (Printing every lap to see the thermal curve unfold)
+        # Print Telemetry (Printing every lap to see the thermal curve unfold)
         if 12 <= lap <= 28 or lap % 10 == 0:
-            traffic_flag = "⚠️ TRAFFIC" if in_traffic else "✅ CLEAN"
+            traffic_flag = "TRAFFIC" if in_traffic else "CLEAN"
             # Highlight Heavy L&C
             lnc_str = f"{current_lnc}%" if current_lnc > 0 else "0.0%"
 
